@@ -140,18 +140,15 @@ pro gen_gauss
 ;X range
 x1 = (findgen(100)-50)/20
 device, decomposed = 1
-plot, x1, g1, title='Gaussian Distributions', ytitle='Probability', xtitle='X'
+plot, x1, g1, title='Gaussian Distributions', ytitle='Probability', xtitle='X', psym=10
 
-;Couldn't make plots into histograms, When I looked up plots
-;and histogram it said to make 'histogram = 1' tried it out but
-;didn't work
 
 
 device, decomposed = 0
 loadct, 13
 
-oplot, x1, g2, color = 100
-oplot, x1, g3, color = 250
+oplot, x1, g2, color = 100, psym = 10
+oplot, x1, g3, color = 250, psym = 10
 
 ;window, 1
 ;plot, x1, g2, psym= 1
