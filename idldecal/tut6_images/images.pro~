@@ -38,8 +38,9 @@ function min_dist
         
      endif
 
-   endfor
-  
+  endfor
+
+  print, 'The closest cat is ', round(close_number), ' from left to right.'
   return, round(close_number)
 
 end
@@ -74,6 +75,7 @@ function whats_my_name
         endelse
      endelse
   endelse
+  print, 'The kitty is named ', name
   ;Returns name
   return, name
 end
@@ -112,12 +114,14 @@ function colorzoom
         endelse
      endelse
   endelse
+  ;Displays zoomed in cat in new window
+  window, 0
   display, imig2
   return, imig2
 end
 
 
-pro better_half
+function better_half
 
   imig = colorzoom()
 
@@ -125,7 +129,11 @@ pro better_half
   a = round(n_elements(imig[*,0])/2.)
   b = n_elements(imig[*,0])-1
   imig_rhalf = imig[a :b,*]
-  display, imig_rhalf, min=0, max=max(imig_half)/3.
+ ;Displays better half in seperate window
+  window, 1
+  ; for brightness did 1/3 of max value in picture
+  display, imig_rhalf, min=0, max=max(imig_rhalf)/3., title='Better Half'
+  
   return, imig_rhalf
 
 
@@ -140,6 +148,7 @@ pro save_kitty
 end
 
 pro main
+  
   
   save_kitty
 
