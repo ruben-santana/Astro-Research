@@ -1,0 +1,73 @@
+function left, x
+  ;Probability of x movin to the left is equal to p
+
+  ;if input is less than or equal to 9
+  if x le 9 then begin
+     p = x/20. 
+  endif else begin
+     ;if input is greator than 9
+     if x gt 9 then begin
+        p = .5
+     endif
+  endelse
+
+return, p
+  
+end
+
+function same, x
+  ;probability of x remaining the same is p
+
+  ;if input is less than or equal to 9
+  if x le 9 then begin
+     p = (10-x)/(20.)
+  endif else begin
+     ;if input is greator than 9
+     if x gt 9 then begin
+        p = (x-9)/(2.*(x+1))
+     endif
+  endelse
+  
+  return, p
+end
+
+function right, x
+  ;probability of x moving to the right is p
+
+  ;if input is lessthan or equal to 9
+  if x le 9 then begin
+     p = .5
+  endif else begin
+     ;if input is greator than 9
+     if x gt 9 then begin
+        p = 5/(x+1)
+     endif 
+  endelse
+
+  return, p
+end
+
+function prob_test, x
+  ;uses functions above to get probability
+  left = left(x)
+  same = same(x)
+  right = right(x)
+  ;prints probabilities
+  print,'The probabilty of the next value being ', x-1, ' is ', left, '.'
+  print,'The probabilty of the next value being ', x, ' is ', same, '.'
+  print,'The probabilty of the next value being ', x+1, ' is ', right, '.'
+  
+  prob = [left, same, right]
+
+  return, prob
+
+end
+
+
+function step_decide,left, same, right
+  seed = 1
+  random = randomu(seed,1)
+  left_range = [0, left]
+  same_range = [left, same+left]
+  right_range =[left+same,left+same+right]
+  
