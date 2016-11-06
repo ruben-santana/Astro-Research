@@ -1,0 +1,288 @@
+;Make Graph with moving square
+pro snake
+
+;Map Size
+x = findgen(100)
+y = findgen(100)
+plot, x, y, title='Snake', /nodata
+
+;Making Snake
+snake_xstart = [50]
+snake_ystart = [50]
+oplot, snake_xstart, snake_ystart, psym=6
+
+;Changes in Snake Pos
+xpos_mod = 0
+ypos_mod = 0
+snake_xpos = snake_xstart - xpos_mod
+snake_ypos = snake_ystart - ypos_mod
+
+;Makes food
+food_xpos = [randomu(seed)*100]
+food_ypos = [randomu(seed)*100]
+oplot, food_xpos, food_ypos, psym=2
+
+;Direction snake is moving
+up = 0
+down = 0
+left = 1
+right = 0
+
+;Lose condition
+lose = 0
+
+;Starts game
+while lose eq 0 do begin
+
+;Animation of Snake  moving left
+while snake_xpos gt 0 and left eq 1 do begin
+  
+   ;chaging snake xpos
+   xpos_mod = xpos_mod - 5
+   snake_xpos = snake_xstart + xpos_mod
+   
+   ;Starting time change
+   time_a = systime(1)
+   time_b = systime(1)
+   time_change = time_b - time_a
+   
+   ;Waits 2 seconds
+   while time_change lt 1 do begin
+      time_b = systime(1)
+      time_change = time_b - time_a
+   endwhile
+   
+   ;Prints position of snake
+   print, [snake_xpos, snake_ypos]
+
+   ;Map After Move
+   plot, x, y, title='Snake', /nodata
+   oplot, snake_xpos, snake_ypos, psym=6
+   oplot, food_xpos, food_ypos, psym=2
+
+   ;user input
+   player_input = get_kbrd(0, /escape)
+   print, player_input
+   byte = total(byte(player_input))
+
+   ;Changes to up
+   if byte eq 183 then begin
+      left = 0
+      up = 1
+      
+   endif else begin
+   ;Changes to move down
+   if byte eq 184 then begin
+      left = 0
+      down = 1
+   endif else begin
+   ;Fixing bug which allowed movement on y_axis
+   if snake_xpos eq 0 then begin
+      down = 0
+      up = 0
+   endif
+   endelse
+   endelse
+
+endwhile
+
+
+
+
+;Animation of Snake  moving right
+while snake_xpos lt 100 and right eq 1 do begin
+  
+   ;chaging snake xpos
+   xpos_mod = xpos_mod + 5
+   snake_xpos = snake_xstart + xpos_mod
+   
+   ;Starting time change
+   time_a = systime(1)
+   time_b = systime(1)
+   time_change = time_b - time_a
+   
+   ;Waits 1 seconds
+   while time_change lt 1 do begin
+      time_b = systime(1)
+      time_change = time_b - time_a
+   endwhile
+   
+   ;Prints position of snake
+   print, [snake_xpos, snake_ypos]
+   
+   ;Map After Move
+   plot, x, y, title='Snake', /nodata
+   oplot, snake_xpos, snake_ypos, psym=6
+   oplot, food_xpos, food_ypos, psym=2
+
+   ;user input
+   player_input = get_kbrd(0, /escape)
+   print, player_input
+   byte = total(byte(player_input))
+
+   ;Changes to up
+   if byte eq 183 then begin
+      right = 0
+      up = 1
+      
+   endif else begin
+   ;Changes to move down
+   if byte eq 184 then begin
+      right = 0
+      down = 1
+   endif else begin
+   ;Fixing bug which allowed for movement on y_axis
+   if snake_xpos eq 100 then begin
+      up = 0
+      down = 0
+   endif
+   endelse 
+   endelse
+
+endwhile
+
+
+
+
+;Animation of Snake moving down
+while snake_ypos gt 0 and down eq 1  do begin
+   
+   ;chaging snake ypos
+   ypos_mod = ypos_mod - 5
+   snake_ypos = snake_ystart + ypos_mod
+   
+   ;Starting time change
+   time_a = systime(1)
+   time_b = systime(1)
+   time_change = time_b - time_a
+   
+   ;Waits 1 second
+   while time_change lt 1 do begin
+      time_b = systime(1)
+      time_change = time_b - time_a
+   endwhile
+   
+   ;Prints position of snake
+   print, [snake_xpos, snake_ypos]
+   
+   ;Map After Move
+   plot, x, y, title='Snake', /nodata
+   oplot, snake_xpos, snake_ypos, psym=6
+   oplot, food_xpos, food_ypos, psym=2
+
+   ;user input
+   player_input = get_kbrd(0, /escape)
+   print, player_input
+   byte = total(byte(player_input))
+
+   ;Changes to move left
+   if byte eq 186 then begin
+      down = 0
+      left = 1
+   endif else begin
+   ;Changes to move right
+   if byte eq 185 then begin
+      down = 0
+      right = 1
+   endif
+   endelse
+
+endwhile
+
+
+
+;Animation of Snake moving up
+while snake_ypos lt 100 and up eq 1 do begin
+   
+   ;chaging snake xpos
+   ypos_mod = ypos_mod + 5
+   snake_ypos = snake_ystart + ypos_mod
+   
+   ;Starting time change
+   time_a = systime(1)
+   time_b = systime(1)
+   time_change = time_b - time_a
+   
+   ;Waits 2 seconds
+   while time_change lt 1 do begin
+      time_b = systime(1)
+      time_change = time_b - time_a
+   endwhile
+   
+   ;Prints position of snake
+   print, [snake_xpos, snake_ypos]
+   
+   ;Map After Move
+   plot, x, y, title='Snake', /nodata
+   oplot, snake_xpos, snake_ypos, psym=6
+   oplot, food_xpos, food_ypos, psym=2
+
+   ;user input
+   player_input = get_kbrd(0, /escape)
+   print, player_input
+   byte = total(byte(player_input))
+
+   ;Changes to move left
+   if byte eq 186 then begin
+      up = 0
+      left = 1
+   endif else begin
+   ;Changes to move right
+   if byte eq 185 then begin
+      up = 0
+      right = 1
+   endif
+   endelse
+
+endwhile
+
+;If snake hits wall you Lose!
+if snake_xpos eq 0 or snake_xpos eq 100 or snake_ypos eq 0 or snake_ypos eq 100 then begin
+   lose =1
+endif
+
+
+endwhile
+
+;Map After You Lose
+plot, x, y, title='YOU LOSE!', /nodata
+oplot, snake_xpos, snake_ypos, psym=6
+oplot, food_xpos, food_ypos, psym=2
+
+
+
+
+end
+
+pro test
+
+a=0
+
+while a lt 10 do begin
+   a = a + 1
+   down = 184
+   ;user input
+   player_input = get_kbrd(1,/escape)
+   print, player_input
+   byte = total(byte(player_input))
+   print, byte
+   print, down
+   if byte eq 184  then begin
+   
+      print, 'it worked'
+
+   endif else begin
+   if byte ne 184 then begin
+      print, 'wront input'
+   endif else begin
+      if a gt 0 then begin
+         print, 'chain'
+      endif
+   endelse
+
+
+endelse
+endwhile
+
+
+end
