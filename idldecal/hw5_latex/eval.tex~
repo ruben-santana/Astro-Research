@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, amsmath, amssymb, graphicx, float, color, soul, multicol, latexsym,underscore}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+\title{IDL Evaluation}
+\author{Ruben Santana}
+\date{today}
+\maketitle
+
+\begin{abstract}
+I really enjoyed the class! You guys did a great job explaing each topic clearly. The homeworks and workshops related to the lecture which made learning how to code really intuitive. Some ideas for improvement are updating the textbook to include a bit of python and latex in the end, and posting solutions to homeworks and workshops earlier.
+\end{abstract}
+
+\section{The Good}
+Homeworks were fun and insightful.
+Lectures were comprehensive.
+Having the option to do anything for final project is amazing!
+
+
+\section{The Bad}
+Writing on white board was sometimes hard to read.
+Homeworks took to long to be graded.
+Should post solutions to homework and should edit parts of textbook, (Examples:Adding psym for histograms, LATEX, Python.)
+
+\section{The Math}
+\begin{equation}
+
+\[x^n + y^n = Z^n \]
+%$$\sum_{n=1}^{\infty}2^{-n} = 1$$
+
+\end{equation}
+
+\end{document}
+
