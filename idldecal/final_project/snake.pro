@@ -1,18 +1,42 @@
+;Random number between [5,95]
+function random_food,max_range
+
+number = [round(((randomu(seed)*(max_range-10))+5)/5.)*5]
+return, number
+
+end
+
+
+;Waits for ___ number of seconds
+pro wait, seconds
+
+;Starting time change
+time_a = systime(1)
+time_b = systime(1)
+time_change = time_b - time_a
+   
+;Waits x seconds
+while time_change lt seconds do begin
+   time_b = systime(1)
+   time_change = time_b - time_a
+endwhile
+
+end
+
+
+
 ;The actual game
 ;x_size = max of x-axis, must be multiple of 20 and greator than 20
 ;y_size = max of y-axis, must be multiple of 20 and greator than 20
-;frame = seconds per frame, lower number faster snake
-pro snake,x_size, y_size, frame 
+;seconds = seconds per frame, lower number faster snake
+pro snake,x_size, y_size, seconds 
 
-;Map Size
-;x_size = 50 ; make multiple of 10 greator than or equal to 20
-;y_size = 50 ; make multiple of 10 greator than or equal to 20
+;Map and color stuff
 x = findgen(x_size)
 y = findgen(y_size)
-plot, x, y, title='Snake', xtitle='Score: 0',/nodata
-
-;Seconds per frame
-;frame = .2 ;lower number = faster movemnet 
+device, decomposed = 0
+loadct, 12
+map_color = 255 ;Default 255, white
 
 ;Direction snake is moving
 up = 0
@@ -23,12 +47,15 @@ right = 0
 ;Game conditions
 lose = 0
 eat = 0
+countdown = 3
+lose_color = 200 ;Default 200, red
 
 ;Making Snake
 snake_xstart = [x_size/2]
 snake_ystart = [y_size/2]
 snake_length = 1
-oplot, snake_xstart, snake_ystart, psym=6
+snake_symbol = 6 ; Default 6, square
+snake_color = 60 ; Default 60, green
 
 ;Changes in Snake Pos
 xpos_mod = 0
@@ -39,18 +66,21 @@ tail_xpos = []
 tail_ypos = []
 snake_xpos = [head_xpos]
 snake_ypos = [head_ypos]
+snake_step = 5; steps taken each frame
 
 ;Makes food as multiple of 5 between [5,95]
-food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+food_xpos = random_number(x_size)
+food_ypos = random_number(y_size)
+food_symbol = 2 ; Default 2, star
+food_color = 80 ; Default 80, teal
 
 ;Assumes food is insde
 inside = 1
 while inside eq 1 do begin
   ;Corrects if food is in snake
   if food_xpos eq snake_xstart and food_ypos eq snake_ystart then begin
-        food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-        food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+        food_xpos = random_number(x_size)
+        food_ypos = random_number(y_size)
         inside = 2
   endif
   ;if the food is inside again repeat
@@ -63,19 +93,26 @@ while inside eq 1 do begin
   endelse       
 endwhile
 
-;Plots food
-oplot, food_xpos, food_ypos, psym=2
-
 
 ;****************************************************************************************************
 ;Starts game
+
+for i=1, countdown do begin
+   ;Plots countdown
+   plot, x, y, title=(4-i), xtitle= snake_length, color = map_color,/nodata
+   oplot, snake_xstart, snake_ystart, psym=snake_symbol, color = snake_color
+   oplot, food_xpos, food_ypos, psym=food_symbol, color = food_color
+   wait,1
+end
+
+
 while lose eq 0 do begin
 
 ;Animation of Snake  moving left
 while snake_xpos[0] gt 0 and left eq 1 do begin
   
    ;chaging snake xpos
-   xpos_mod = xpos_mod - 5
+   xpos_mod = xpos_mod - snake_step
    head_xpos = snake_xstart + xpos_mod
    
 
@@ -84,11 +121,11 @@ while snake_xpos[0] gt 0 and left eq 1 do begin
       
       ;Snake grows
       snake_length = snake_length + 1
-      eat=1
+      eat = 1
 
       ;Makes food as multiple of 5 between [5,95]
-      food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-      food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+      food_xpos = random_number(x_size)
+      food_ypos = random_number(y_size)
 
       ;Assumes food is insde
       inside = 1
@@ -96,8 +133,8 @@ while snake_xpos[0] gt 0 and left eq 1 do begin
          ;Corrects if food is in snake
          for i=0, snake_length-2 do begin
             if food_xpos eq snake_xpos[i] and food_ypos eq snake_ypos[i] then begin
-               food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-               food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+               food_xpos = random_number(x_size)
+               food_ypos = random_number(y_size)
                inside = 2
             endif
          endfor
@@ -145,25 +182,17 @@ while snake_xpos[0] gt 0 and left eq 1 do begin
       endif
    endfor
 
-   ;Starting time change
-   time_a = systime(1)
-   time_b = systime(1)
-   time_change = time_b - time_a
-   
-   ;Waits x seconds
-   while time_change lt frame do begin
-      time_b = systime(1)
-      time_change = time_b - time_a
-   endwhile
+   ;Waits x amount of seconds between frames
+   wait,seconds
    
    ;Prints position of snake
    print,''
    print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
 
    ;Map After Move
-   plot, x, y, title='Snake', xtitle= snake_length, /nodata
-   oplot, snake_xpos, snake_ypos, psym=6
-   oplot, food_xpos, food_ypos, psym=2
+   plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
+   oplot, snake_xpos, snake_ypos, psym=snake_symbol,color= snake_color
+   oplot, food_xpos, food_ypos, psym=food_symbol, color= food_color
 
    ;user input
    player_input = get_kbrd(0, /escape)
@@ -197,7 +226,7 @@ endwhile
 while head_xpos lt x_size and right eq 1 do begin
   
    ;chaging snake xpos
-   xpos_mod = xpos_mod + 5
+   xpos_mod = xpos_mod + snake_step
    head_xpos = snake_xstart + xpos_mod
    
    ;Eating food
@@ -207,16 +236,16 @@ while head_xpos lt x_size and right eq 1 do begin
       snake_length = snake_length + 1
       eat = 1
       ;Makes food as multiple of 5 between [5,95]
-      food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-      food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+      food_xpos = random_number(x_size)
+      food_ypos = random_number(y_size)
       ;Assumes food is insde
       inside = 1
       while inside eq 1 do begin
          ;Corrects if food is in snake
          for i=0, snake_length-2 do begin
             if food_xpos eq snake_xpos[i] and food_ypos eq snake_ypos[i] then begin
-               food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-               food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+               food_xpos = random_number(x_size)
+               food_ypos = random_number(x_size)
                inside = 2
             endif
          endfor
@@ -263,31 +292,22 @@ while head_xpos lt x_size and right eq 1 do begin
       endif
    endfor
 
-   ;Starting time change
-   time_a = systime(1)
-   time_b = systime(1)
-   time_change = time_b - time_a
-   
-   ;Waits x seconds
-   while time_change lt frame do begin
-      time_b = systime(1)
-      time_change = time_b - time_a
-   endwhile
+   ;Waits x amount of seconds between frames
+   wait,seconds
    
    ;Prints position of snake
    print,''
    print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
-   plot, x, y, title='Snake', xtitle= snake_length, /nodata
-   oplot, snake_xpos, snake_ypos, psym=6
-   oplot, food_xpos, food_ypos, psym=2
+   plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
+   oplot, snake_xpos, snake_ypos, psym=snake_symbol,color= snake_color
+   oplot, food_xpos, food_ypos, psym=food_symbol, color= food_color
 
    ;user input
    player_input = get_kbrd(0, /escape)
    print, player_input
    byte = total(byte(player_input))
-
 
     ;Fixing bug which allowed for movement on y_axis
    if snake_xpos[0] eq x_size then begin
@@ -317,7 +337,7 @@ endwhile
 while head_ypos gt 0 and down eq 1  do begin
    
    ;chaging snake ypos
-   ypos_mod = ypos_mod - 5
+   ypos_mod = ypos_mod - snake_step
    head_ypos = snake_ystart + ypos_mod
    
    ;Eating food
@@ -327,16 +347,16 @@ while head_ypos gt 0 and down eq 1  do begin
       snake_length = snake_length + 1
       eat = 1 
       ;Makes food as multiple of 5 between [5,95]
-      food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-      food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+      food_xpos = random_number(x_size)
+      food_ypos = random_number(y_size)
       ;Assumes food is insde
       inside = 1
       while inside eq 1 do begin
          ;Corrects if food is in snake
          for i=0, snake_length-2 do begin
             if food_xpos eq snake_xpos[i] and food_ypos eq snake_ypos[i] then begin
-               food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-               food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+               food_xpos = random_number(x_size)
+               food_ypos = random_number(y_size)
                inside = 2
             endif
          endfor
@@ -382,25 +402,17 @@ while head_ypos gt 0 and down eq 1  do begin
       endif
    endfor
    
-   ;Starting time change
-   time_a = systime(1)
-   time_b = systime(1)
-   time_change = time_b - time_a
-   
-   ;Waits x second
-   while time_change lt frame do begin
-      time_b = systime(1)
-      time_change = time_b - time_a
-   endwhile
+   ;Waits x amount of seconds between frames
+   wait,seconds
    
    ;Prints position of snake
    print,''
    print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
-   plot, x, y, title='Snake', xtitle= snake_length, /nodata
-   oplot, snake_xpos, snake_ypos, psym=6
-   oplot, food_xpos, food_ypos, psym=2
+   plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
+   oplot, snake_xpos, snake_ypos, psym=snake_symbol,color= snake_color
+   oplot, food_xpos, food_ypos, psym=food_symbol, color= food_color
 
    ;user input
    player_input = get_kbrd(0, /escape)
@@ -427,7 +439,7 @@ endwhile
 while head_ypos lt y_size and up eq 1 do begin
    
    ;chaging snake xpos
-   ypos_mod = ypos_mod + 5
+   ypos_mod = ypos_mod + snake_step
    head_ypos = snake_ystart + ypos_mod
 
    ;Eating food
@@ -437,16 +449,16 @@ while head_ypos lt y_size and up eq 1 do begin
       snake_length = snake_length + 1
       eat = 1
       ;Makes food as multiple of 5 between [5,95]
-      food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-      food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+      food_xpos = random_number(x_size)
+      food_ypos = random_number(y_size)
       ;Assumes food is insde
       inside = 1
       while inside eq 1 do begin
          ;Corrects if food is in snake
          for i=0, snake_length-2 do begin
             if food_xpos eq snake_xpos[i] and food_ypos eq snake_xpos[i] then begin
-               food_xpos = [round(((randomu(seed)*(x_size-10))+5)/5.)*5]
-               food_ypos = [round(((randomu(seed)*(y_size-10))+5)/5.)*5]
+               food_xpos = random_number(x_size)
+               food_ypos = random_number(y_size)
                inside = 2
             endif
          endfor
@@ -493,25 +505,17 @@ while head_ypos lt y_size and up eq 1 do begin
       endif
    endfor
 
-   ;Starting time change
-   time_a = systime(1)
-   time_b = systime(1)
-   time_change = time_b - time_a
-   
-   ;Waits x seconds
-   while time_change lt frame do begin
-      time_b = systime(1)
-      time_change = time_b - time_a
-   endwhile
+   ;Waits x amount of seconds between frames
+   wait,seconds
    
    ;Prints position of snake
    print,''
    print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
-   plot, x, y, title='Snake', xtitle= snake_length, /nodata
-   oplot, snake_xpos, snake_ypos, psym=6
-   oplot, food_xpos, food_ypos, psym=2
+   plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
+   oplot, snake_xpos, snake_ypos, psym=snake_symbol,color= snake_color
+   oplot, food_xpos, food_ypos, psym=food_symbol, color= food_color
 
    ;user input
    player_input = get_kbrd(0, /escape)
@@ -543,9 +547,9 @@ endwhile
 ;****************************************************************************************************
 
 ;Map After You Lose
-plot, x, y, title='YOU LOSE!', xtitle= snake_length, /nodata
-oplot, snake_xpos, snake_ypos, psym=6
-oplot, food_xpos, food_ypos, psym=2
+plot, x, y, title='YOU LOSE!', xtitle= snake_length,color= lose_color, /nodata
+oplot, snake_xpos, snake_ypos, psym=snake_symbol,color= lose_color
+oplot, food_xpos, food_ypos, psym=food_symbol, color= lose_color
 print, ''
 print, 'Final Snake Length: ', snake_length
 
