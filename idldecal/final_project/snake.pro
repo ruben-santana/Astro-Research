@@ -1,5 +1,5 @@
-;Random number between [5,95]
-function random_food,max_range
+;Random number between [5,95] and a multiple of 5
+function random_number,max_range
 
 number = [round(((randomu(seed)*(max_range-10))+5)/5.)*5]
 return, number
@@ -96,7 +96,6 @@ endwhile
 
 ;****************************************************************************************************
 ;Starts game
-
 for i=1, countdown do begin
    ;Plots countdown
    plot, x, y, title=(4-i), xtitle= snake_length, color = map_color,/nodata
@@ -187,7 +186,7 @@ while snake_xpos[0] gt 0 and left eq 1 do begin
    
    ;Prints position of snake
    print,''
-   print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
+   print, 'Snake Head Position:', [snake_xpos[0], snake_ypos[0]]
 
    ;Map After Move
    plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
@@ -297,7 +296,7 @@ while head_xpos lt x_size and right eq 1 do begin
    
    ;Prints position of snake
    print,''
-   print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
+   print, 'Snake Head Position:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
    plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
@@ -329,7 +328,6 @@ while head_xpos lt x_size and right eq 1 do begin
    endelse
 
 endwhile
-
 
 
 
@@ -407,7 +405,7 @@ while head_ypos gt 0 and down eq 1  do begin
    
    ;Prints position of snake
    print,''
-   print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
+   print, 'Snake Head Position:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
    plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
@@ -510,7 +508,7 @@ while head_ypos lt y_size and up eq 1 do begin
    
    ;Prints position of snake
    print,''
-   print, 'Snake Head Postion:', [snake_xpos[0], snake_ypos[0]]
+   print, 'Snake Head Position:', [snake_xpos[0], snake_ypos[0]]
    
    ;Map After Move
    plot, x, y, title='Snake', xtitle= snake_length,color= map_color, /nodata
@@ -553,7 +551,7 @@ oplot, food_xpos, food_ypos, psym=food_symbol, color= lose_color
 print, ''
 print, 'Final Snake Length: ', snake_length
 
-end ;end of program
+end ;end of snake
 
 
 
@@ -569,7 +567,7 @@ speed_choice = get_kbrd()
 answer = 0
 
 
-;Gets selection of  speed
+;Gets selection of speed
 while answer eq 0 do begin
 ;Fast  
  if speed_choice eq '1' then begin
@@ -604,7 +602,7 @@ answer_2 = 0
 ;Gets selection of  speed
 while answer_2 eq 0 do begin  
  
- ;Small graph
+;Small graph
  if graph_choice eq '1' then begin
       answer_2 = 1 ; Valid Answer
       x_size = 60
