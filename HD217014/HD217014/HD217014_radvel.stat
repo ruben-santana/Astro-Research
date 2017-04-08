@@ -1,0 +1,20 @@
+[fit]
+postfile = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_post_obj.pkl
+run = True
+
+[plot]
+rv_plot = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_rv_multipanel.pdf
+corner_plot = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_corner.pdf
+trend_plot = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_trends.pdf
+
+[mcmc]
+run = True
+chainfile = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_chains.csv.tar.bz2
+summaryfile = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_post_summary.csv
+nwalkers = 50
+postfile = C:\Users\rscsa\Research\radvel-master\HD217014\HD217014\HD217014_post_obj.pkl
+nsteps = 20000
+
+[bic]
+nplanets = [OrderedDict([('$N_{\\rm data}$', (59, 'number of measurements')), ('$N_{\\rm free}$', (4, 'number of free parameters')), ('RMS', (40.07, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (71235.75, 'assuming no jitter')), ('$\\chi^{2}_{\\nu}$', (1295.2, 'assuming no jitter')), ('$\\ln{\\mathcal{L}}$', (-423.43000000000001, 'natural log of the likelihood')), ('BIC', (854.95000000000005, 'Bayesian information criterion'))]), OrderedDict([('$N_{\\rm data}$', (59, 'number of measurements')), ('$N_{\\rm free}$', (5, 'number of free parameters')), ('RMS', (33.350000000000001, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (47957.230000000003, 'assuming no jitter')), ('$\\chi^{2}_{\\nu}$', (888.10000000000002, 'assuming no jitter')), ('$\\ln{\\mathcal{L}}$', (-359.07999999999998, 'natural log of the likelihood')), ('BIC', (727.24000000000001, 'Bayesian information criterion'))])]
+

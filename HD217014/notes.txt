@@ -1,0 +1,18 @@
+Estimate Period
+5 days
+- 06/01/2009 - 06/05/2009
+
+From power Graph
+- about 4 JD
+
+
+http://astropy.readthedocs.io/en/latest/stats/lombscargle.html
+
+THIS ONE!
+https://jakevdp.github.io/blog/2015/06/13/lomb-scargle-in-python/
+
+
+http://jakevdp.github.io/astropy/stats/lombscargle.html
+
+Least square
+https://python4mpia.github.io/fitting_data/least-squares-fitting.html
