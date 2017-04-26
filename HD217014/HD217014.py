@@ -23,11 +23,7 @@ params['tc1'] = 2072.79438    # time of inferior conjunction of 1st planet
 params['e1'] = 0.00          # eccentricity of 'per tc secosw sesinw logk'1st planet
 params['w1'] = np.pi/2.      # argument of periastron of the star's orbit for 1st planet
 params['k1'] =  35.7      # velocity semi-amplitude for 1st planet
-# params['per2'] = 42.363011    # same parameters for 2nd planet ...
-# params['tc2'] = 2082.62516
-# params['e2'] = 0.01
-# params['w2'] = np.pi/2.
-# params['k2'] = 10.0
+
 
 params['dvdt'] = 0.0         # slope
 params['curv'] = 0.0         # curvature
