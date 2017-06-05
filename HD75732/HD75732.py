@@ -18,44 +18,44 @@ planet_letters = {1: 'a', 2:'b', 3:'c', 4:'d'}
 # Define prior centers (initial guesses) here.
 params = radvel.RVParameters(nplanets,basis='per tc e w k')    # initialize RVparameters object
 
-params['per1'] = 14.65          # period of 1st planet
-params['tc1'] = 2073.96         # time of inferior conjunction of 1st planet
-params['e1'] = 0.02             # eccentricity of 'per tc secosw sesinw logk'1st planet
+params['per1'] = 14.6521          # period of 1st planet
+params['tc1'] = 2074.31         # time of inferior conjunction of 1st planet
+params['e1'] = 0.01             # eccentricity of 'per tc secosw sesinw logk'1st planet
 params['w1'] = np.pi/2.         # argument of periastron of the star's orbit for 1st planet
-params['k1'] =  70.0876           # velocity semi-amplitude for 1st planet
+params['k1'] =  70.39           # velocity semi-amplitude for 1st planet
 
-params['per2'] =  4258.49       # period of 2nd planet
-params['tc2'] = 3298.15         # time of inferior conjunction of 2nd planet
-params['e2'] = 0.17            # eccentricity of 'per tc secosw sesinw logk' 2nd planet
+params['per2'] =  3847.22       # period of 2nd planet
+params['tc2'] = 4441.57          # time of inferior conjunction of 2nd planet
+params['e2'] = 0.19            # eccentricity of 'per tc secosw sesinw logk' 2nd planet
 params['w2'] = np.pi/2.         # argument of periastron of the star's orbit for 2nd planet
-params['k2'] =  27.9438          # velocity semi-amplitude for 2nd planet
+params['k2'] =  31.65          # velocity semi-amplitude for 2nd planet
 
-params['per3'] = 44.39          # period of 3rd planet
-params['tc3'] = 2086.84         # time of inferior conjunction of 3rd planet
-params['e3'] = 0.33             # eccentricity of 'per tc secosw sesinw logk'3rd planet
+params['per3'] = 44.3886         # period of 3rd planet
+params['tc3'] = 2083.6          # time of inferior conjunction of 3rd planet
+params['e3'] = 0.35             # eccentricity of 'per tc secosw sesinw logk'3rd planet
 params['w3'] = np.pi/2.         # argument of periastron of the star's orbit for 3rd planet
-params['k3'] = 18.3226            # velocity semi-amplitude for 3rd planet
+params['k3'] = 10.73            # velocity semi-amplitude for 3rd planet
 
-params['per4'] = 2.82           # period of 4th planet
-params['tc4'] = 1087.07         # time of inferior conjunction of 4th planet
-params['e4'] = 0.09             # eccentricity of 'per tc secosw sesinw logk' 4th planet
+params['per4'] = 2.81739        # period of 4th planet
+params['tc4'] = 1086.73          # time of inferior conjunction of 4th planet
+params['e4'] = 0.04             # eccentricity of 'per tc secosw sesinw logk' 4th planet
 params['w4'] = np.pi/2.         # argument of periastron of the star's orbit for 4th planet
-params['k4'] = 14.3591           # velocity semi-amplitude for 4th planet
+params['k4'] = 5.57           # velocity semi-amplitude for 4th planet
 
-params['per5'] = 263.685712162  # period of 5th planet
-params['tc5'] = 2000.07         # time of inferior conjunction of 5th planet
-params['e5'] = 0.09             # eccentricity of 'per tc secosw sesinw logk' 5th planet
+params['per5'] = 259.7          # period of 5th planet
+params['tc5'] = 2094.83          # time of inferior conjunction of 5th planet
+params['e5'] = 0.0             # eccentricity of 'per tc secosw sesinw logk' 5th planet
 params['w5'] = np.pi/2.         # argument of periastron of the star's orbit for 5th planet
-params['k5'] = 10.0             # velocity semi-amplitude for 3rd planet
+params['k5'] = 5.0             # velocity semi-amplitude for 3rd planet
 
-params['dvdt'] = 0.0            # slope
-params['curv'] = 0.0            # curvature
+params['dvdt'] = 3.82108e-05    # slope
+params['curv'] = -9.57252e-08   # curvature
 
 params['gamma_k'] = 0.0         # velocity zero-point for hires_rk
 params['jit_k'] = 2.6           # jitter for hires_rk
 
-params['gamma_j'] = 1.0         # "                   "   hires_rj
-params['jit_j'] = 2.6           # "      "   hires_rj
+params['gamma_j'] =  1.02395    # "                   "   hires_rj
+params['jit_j'] =  7.83348      # "      "   hires_rj
 
 
 
