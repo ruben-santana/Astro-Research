@@ -7,7 +7,7 @@ import radvel
 import os
 
 # Define global planetary system and dataset parameters
-starname = 'HD75732'
+starname = 'HD75732_5planet'
 nplanets = 5   # number of planets in the system
 instnames = ['k','j']    # list of instrument names. Can be whatever you like but should match 'tel' column in the input file.
 ntels = len(instnames)       # number of instruments with unique velocity zero-points

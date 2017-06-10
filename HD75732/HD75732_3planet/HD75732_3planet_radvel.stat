@@ -1,0 +1,20 @@
+[fit]
+postfile = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_post_obj.pkl
+run = True
+
+[plot]
+rv_plot = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_rv_multipanel.pdf
+corner_plot = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_corner.pdf
+trend_plot = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_trends.pdf
+
+[bic]
+nplanets = [OrderedDict([('$N_{\\rm data}$', (654, 'number of measurements')), ('$N_{\\rm free}$', (4, 'number of free parameters')), ('RMS', (48.670000000000002, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (20617.580000000002, 'jitter fixed')), ('$\\chi^{2}_{\\nu}$', (31.719999999999999, 'jitter fixed')), ('$\\ln{\\mathcal{L}}$', (-12321.209999999999, 'natural log of the likelihood')), ('BIC', (24652.900000000001, 'Bayesian information criterion'))]), OrderedDict([('$N_{\\rm data}$', (654, 'number of measurements')), ('$N_{\\rm free}$', (9, 'number of free parameters')), ('RMS', (14.65, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (1870.6900000000001, 'jitter fixed')), ('$\\chi^{2}_{\\nu}$', (2.8999999999999999, 'jitter fixed')), ('$\\ln{\\mathcal{L}}$', (-2947.77, 'natural log of the likelihood')), ('BIC', (5911.0200000000004, 'Bayesian information criterion'))]), OrderedDict([('$N_{\\rm data}$', (654, 'number of measurements')), ('$N_{\\rm free}$', (14, 'number of free parameters')), ('RMS', (11.35, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (1101.71, 'jitter fixed')), ('$\\chi^{2}_{\\nu}$', (1.72, 'jitter fixed')), ('$\\ln{\\mathcal{L}}$', (-2563.2800000000002, 'natural log of the likelihood')), ('BIC', (5147.04, 'Bayesian information criterion'))]), OrderedDict([('$N_{\\rm data}$', (654, 'number of measurements')), ('$N_{\\rm free}$', (19, 'number of free parameters')), ('RMS', (9.0800000000000001, 'RMS of residuals in m s$^{-1}$')), ('$\\chi^{2}$', (681.42999999999995, 'jitter fixed')), ('$\\chi^{2}_{\\nu}$', (1.0700000000000001, 'jitter fixed')), ('$\\ln{\\mathcal{L}}$', (-2353.1399999999999, 'natural log of the likelihood')), ('BIC', (4731.7600000000002, 'Bayesian information criterion'))])]
+
+[mcmc]
+run = True
+chainfile = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_chains.csv.tar.bz2
+summaryfile = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_post_summary.csv
+nwalkers = 50
+postfile = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732_3planet\HD75732_3planet_post_obj.pkl
+nsteps = 10000
+

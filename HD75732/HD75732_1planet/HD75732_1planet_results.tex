@@ -1,0 +1,94 @@
+
+\documentclass{emulateapj}
+\usepackage{graphicx,textcomp,fancyhdr,hyperref}
+\begin{document}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+\chead{Summary of \texttt{RadVel} results for HD75732\_1planet}
+
+\begin{deluxetable*}{lrr}
+\tablecaption{Model Comparison}
+\tablehead{\colhead{Statistic} & \colhead{0 planets} & \colhead{{\bf 1 planets (adopted)}}}
+\startdata
+
+$N_{\rm data}$ (number of measurements)  & 654 & 654\\
+$N_{\rm free}$ (number of free parameters)  & 4 & 9\\
+RMS (RMS of residuals in m s$^{-1}$)  & 48.67 & 14.64\\
+$\chi^{2}$ (jitter fixed)  & 7320.71 & 658.38\\
+$\chi^{2}_{\nu}$ (jitter fixed)  & 11.26 & 1.02\\
+$\ln{\mathcal{L}}$ (natural log of the likelihood)  & -6012.55 & -2681.39\\
+BIC (Bayesian information criterion)  & 12035.59 & 5378.26\\
+
+\enddata
+\label{tab:comp}
+\end{deluxetable*}
+
+
+\begin{deluxetable}{lrrr}
+\tablecaption{MCMC Posteriors}
+\tablehead{\colhead{Parameter} & \colhead{Credible Interval} & \colhead{Maximum Likelihood} & \colhead{Units}}
+\startdata
+\sidehead{\bf{Modified MCMC Step Parameters}}
+$\sqrt{e}\cos{\omega}_{b}$ & -0.062 $^{+0.083}_{-0.068}$ & -0.082 & \\
+$\sqrt{e}\sin{\omega}_{b}$ & 0.048 $^{+0.065}_{-0.08}$ & 0.083 & \\
+\hline
+\sidehead{\bf{Orbital Parameters}}
+$P_{b}$ & 14.65242 $\pm 0.00036$ & 14.65242 & days\\
+$T\rm{conj}_{b}$ & 2074.04 $^{+0.31}_{-0.33}$ & 2074.04 & JD\\
+$e_{b}$ & 0.0131 $^{+0.012}_{-0.0089}$ & 0.01 & \\
+$\omega_{b}$ & 2.56 $^{+1.1}_{-0.99}$ & 2.3 & radians\\
+$K_{b}$ & 67.8 $^{+0.82}_{-0.8}$ & 67.83 & m s$^{-1}$\\
+\hline
+\sidehead{\bf{Other Parameters}}
+$\gamma_{\rm k}$ & 16.0 $^{+4.8}_{-4.6}$ & 16.2 & m s$-1$\\
+$\gamma_{\rm j}$ & 4.14 $^{+0.75}_{-0.78}$ & 4.18 & m s$-1$\\
+$\dot{\gamma}$ & 0.00412 $^{+0.00065}_{-0.00068}$ & 0.00408 & m s$^{-1}$ day$^{-1}$\\
+$\ddot{\gamma}$ & -1.391e-05 $^{+5.1e-07}_{-4.9e-07}$ & -1.39e-05 & m s$^{-1}$ day$^{-2}$\\
+$\sigma_{\rm k}$ & 13.91 $^{+0.77}_{-1.2}$ & 15.0 & $\rm m\ s^{-1}$\\
+$\sigma_{\rm j}$ & 14.51 $^{+0.3}_{-0.37}$ & 14.49 & $\rm m\ s^{-1}$\\
+
+\enddata
+\tablenotetext{}{220000 links saved}
+\tablenotetext{}{Reference epoch for $\gamma$,$\dot{\gamma}$,$\ddot{\gamma}$:         14992.0}
+\label{tab:params}
+\end{deluxetable}
+
+\begin{deluxetable}{lrr}
+\tablecaption{Summary of Priors}
+\tablehead{}
+\startdata
+$e_{b}$ constrained to be $<0.99$ \\\\
+$K$ constrained to be $>0$\\\\
+Gaussian prior on $P_{b}$: $14.6521 \pm 3.663025$ \\\\\\
+Bounded prior: $0.0 < \sigma_{\rm j} < 15.0$\\\\
+Bounded prior: $0.0 < \sigma_{\rm k} < 15.0$\\\\
+
+\enddata
+\end{deluxetable}
+
+
+\begin{figure*}[!h]
+\centering
+\includegraphics[width=6.5in]{HD75732_1planet_rv_multipanel.pdf}
+\caption{
+Best-fit 1-planet Keplerian orbital model for HD75732\_1planet.
+The maximum likelihood model is plotted while the orbital parameters listed in Table \ref{tab:params}
+are the median values of the posterior distributions.
+The thin blue line is the best fit 1-planet model. We add in quadrature the RV jitter term(s) listed in Table \ref{tab:params}
+with the measurement uncertainties for all RVs.
+{\bf b)} Residuals to the best fit 1-planet model.
+{\bf c)} RVs phase-folded to the ephemeris of planet b. The Keplerian orbital models for all other planets (if any) have been subtracted.
+The small point colors and symbols are the same as in panel {\bf a}.
+Red circles (if present) are the same velocities binned in 0.08 units of orbital phase.
+The phase-folded model for planet b is shown as the blue line.
+}
+\end{figure*}
+
+\begin{figure*}[!h]
+\centering
+\includegraphics[width=6.5in]{HD75732_1planet_corner.pdf}
+\caption{Posterior distributions for all free parameters.}
+\end{figure*}
+
+\lfoot{\footnotesize{report produced by \texttt{RadVel} v0.9.2: \href{http://radvel.readthedocs.io}{http://radvel.readthedocs.io}}}
+\end{document}
