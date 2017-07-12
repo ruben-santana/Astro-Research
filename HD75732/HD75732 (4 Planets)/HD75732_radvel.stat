@@ -1,7 +1,0 @@
-[fit]
-postfile = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732\HD75732_post_obj.pkl
-run = True
-
-[plot]
-rv_plot = C:\Users\rscsa\Research\radvel-master\Research\HD75732\HD75732\HD75732_rv_multipanel.pdf
-
