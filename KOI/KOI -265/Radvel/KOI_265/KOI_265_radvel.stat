@@ -1,0 +1,7 @@
+[fit]
+postfile = C:\Users\rscsa\Research\radvel-master\Research\KOI\KOI -265\Radvel\KOI_265\KOI_265_post_obj.pkl
+run = True
+
+[plot]
+rv_plot = C:\Users\rscsa\Research\radvel-master\Research\KOI\KOI -265\Radvel\KOI_265\KOI_265_rv_multipanel.pdf
+
